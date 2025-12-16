@@ -14,6 +14,7 @@ const Field = ({ label, children, htmlFor, error }) => {
 const getChildId = (children) => {
     const child = React.Children.only(children);
 
+    // eslint-disable-next-line no-unsafe-optional-chaining
     if("id" in child?.props){
         return child.props.id
     }
