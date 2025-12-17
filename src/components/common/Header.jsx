@@ -7,6 +7,7 @@ import Logout from '../auth/Logout';
 import { useAuth } from '../../hooks/useAuth';
 import useProfile from '../../hooks/useProfile';
 
+
 const Header = () => {
   const { auth } = useAuth();
   const { state } = useProfile();

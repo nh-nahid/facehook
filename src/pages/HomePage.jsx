@@ -1,14 +1,13 @@
-import React, { useEffect, useReducer } from 'react';
-import Header from '../components/common/Header';
-import { Link } from 'react-router';
-import { postReducer } from '../reducers/postReducer';
-import { initialState } from '../reducers/ProfileReducer';
+import React, { useEffect, useState } from 'react';
 import { useAxios } from '../hooks/useAxios';
 import PostList from '../components/posts/PostList';
 import { actions } from '../actions';
+import { usePost } from '../hooks/usePost';
+import NewPost from '../components/posts/NewPost';
 
 const HomePage = () => {
-    const [ state, dispatch ] = useReducer(postReducer, initialState);
+    const [showPostEntry, setShowPostEntry] = useState(false);
+    const {state, dispatch } = usePost()
     const { api } = useAxios();
 
     useEffect(() => {
@@ -38,7 +37,8 @@ const HomePage = () => {
     }
     return (
         <>
-        <PostList posts = {state?.posts} />
+        <NewPost showPostEntry={showPostEntry} setShowPostEntry={setShowPostEntry} />
+        <PostList posts = {state?.posts} showPostEntry={showPostEntry} setShowPostEntry={setShowPostEntry} />
         </>
     );
 };

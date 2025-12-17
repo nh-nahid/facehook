@@ -1,16 +1,96 @@
-# React + Vite
+# Facehook
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application built with React that allows users to register, login, view and interact with posts. Includes features like profile management, liking posts, commenting, and avatar upload.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
 
-## React Compiler
+- [Features](#features)
+- [Technologies](#technologies)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+- [License](#license)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- User registration and login with JWT authentication
+- Profile management including avatar upload and bio editing
+- Create, view, like, and comment on posts
+- Responsive UI with modern React hooks
+- Optimistic updates for likes
+- Token refresh for maintaining session
+
+---
+
+## Technologies
+
+- Frontend:
+  - React
+  - React Hooks (`useState`, `useEffect`, `useReducer`)
+  - react-hook-form
+  - Axios
+  - Tailwind CSS (or your preferred CSS framework)
+- Backend:
+  - REST API (Node.js / Express assumed)
+  - JWT for authentication
+- Tools:
+  - Vite
+  - Postman (for API testing)
+
+---
+
+## Installation
+
+
+```bash
+
+1. Clone the repository:
+git clone https://github.com/nh-nahid/facehook.git
+cd facehook
+```
+```bash
+
+2. Install dependencies:
+npm install
+```
+```bash
+
+3. Create a .env file in the root with the following variables:
+VITE_SERVER_BASE_URL=http://localhost:3000
+```
+```bash
+4. Start the development server:
+npm run dev
+```
+
+## Usage
+- Register a new user via the registration form.
+
+- Login using your credentials.
+
+- Access your profile to view and edit your bio, or upload an avatar.
+
+- View posts on the home page.
+
+- Like/unlike posts and add comments.
+
+## API Endpoints
+
+| Endpoint              | Method | Description               |
+| --------------------- | ------ | ------------------------- |
+| `/auth/register`      | POST   | Register a new user       |
+| `/auth/login`         | POST   | Login user and return JWT |
+| `/auth/refresh-token` | POST   | Refresh expired JWT token |
+| `/profile/:id`        | GET    | Get user profile details  |
+| `/profile/:id`        | PATCH  | Update user profile (bio) |
+| `/profile/:id/avatar` | POST   | Upload user avatar        |
+| `/posts`              | GET    | Get all posts             |
+| `/posts/:id/like`     | PATCH  | Like or unlike a post     |
+
+
+## License
+All right reserved by LWS

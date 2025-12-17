@@ -1,11 +1,14 @@
 import React from 'react';
 import PostCard from './PostCard';
+import NewPost from './NewPost';
 
-const PostList = ({ posts }) => {
+const PostList = ({ posts, showPostEntry, setShowPostEntry }) => {
     return (
-        posts && posts.map(post => (
-            <PostCard key={post.id} post={post} />
-        ))
+        <>
+        {showPostEntry ? (<NewPost/>) : (posts && posts.map(post => (
+            <PostCard key={post.id} post={post} showPostEntry={showPostEntry} setShowPostEntry={setShowPostEntry}/>
+        )))}
+        </>
     );
 };
 

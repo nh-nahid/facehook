@@ -4,10 +4,10 @@ import PostBody from './PostBody';
 import PostAction from './PostAction';
 import PostComments from './PostComments';
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, showPostEntry, setShowPostEntry }) => {
     return (
         <article className="card mt-6 lg:mt-8">
-            <PostHeader post={post} />
+            <PostHeader post={post} showPostEntry={showPostEntry} setShowPostEntry={setShowPostEntry}/>
             <PostBody poster={post?.image} content={post?.content} />
             <PostAction post={post} commentCount = {post?.comments?.length} />
             <PostComments post={post}/>

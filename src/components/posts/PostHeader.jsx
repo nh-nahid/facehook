@@ -5,10 +5,42 @@ import DeleteIcon from '../../assets/icons/delete.svg'
 import TimeIcon from '../../assets/icons/time.svg'
 import { getDateDifferenceFromNow } from '../../utils';
 import { useAvatar } from '../../hooks/useAvatar';
+import { useAuth } from '../../hooks/useAuth';
+import { usePost } from '../../hooks/usePost';
+import { actions } from '../../actions';
+import { useAxios } from '../../hooks/useAxios';
 
-const PostHeader = ({ post }) => {
+const PostHeader = ({ post, setShowPostEntry}) => {
     const { avatarURL } = useAvatar(post);
     const [showAction, setShowAction] = useState();
+    const { auth } = useAuth();
+    const { api } = useAxios()
+    const isMe = post?.author?.id === auth?.user?.id;
+    const { dispatch } = usePost();
+
+    const handleEditPost = async () => {
+        setShowPostEntry(true);
+        console.log("works");
+        
+    }
+    const handleDeletePost = async () => {
+        dispatch({ type: actions.post.DATA_FETCHING });
+
+        try {
+            const response = await api.delete(`${import.meta.env.VITE_SERVER_BASE_URL}/posts/${post.id}`);
+
+            if (response.status === 200) {
+                dispatch({ type: actions.post.POST_DELETED, data: post.id })
+            }
+
+
+        } catch (error) {
+            console.log(error);
+            dispatch({ type: actions.post.DATA_FETCH_ERROR, error })
+
+        }
+    }
+
 
     return (
         <header className="flex items-center justify-between gap-4">
@@ -30,18 +62,22 @@ const PostHeader = ({ post }) => {
             </div>
 
             <div className="relative">
-                <button onClick={() => setShowAction(!showAction)}>
-                    <img src={ThreeDotsIcon} alt="3dots of Action" />
-                </button>
+                {isMe &&
+                    <button onClick={() => setShowAction(!showAction)}>
+                        <img src={ThreeDotsIcon} alt="3dots of Action" />
+                    </button>
+                }
 
                 {
                     showAction && (
                         <div className="action-modal-container">
-                            <button className="action-menu-item hover:text-lwsGreen">
+                            <button className="action-menu-item hover:text-lwsGreen"
+                            onClick={handleEditPost}
+                            >
                                 <img src={EditIcon} alt="Edit" />
                                 Edit
                             </button>
-                            <button className="action-menu-item hover:text-red-500">
+                            <button className="action-menu-item hover:text-red-500" onClick={handleDeletePost}>
                                 <img src={DeleteIcon} alt="Delete" />
                                 Delete
                             </button>
