@@ -33,7 +33,7 @@ A modern web application built with React that allows users to register, login, 
   - React Hooks (`useState`, `useEffect`, `useReducer`)
   - react-hook-form
   - Axios
-  - Tailwind CSS (or your preferred CSS framework)
+  - Tailwind CSS
 - Backend:
   - REST API (Node.js)
   - JWT for authentication
