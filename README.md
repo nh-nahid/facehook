@@ -35,7 +35,7 @@ A modern web application built with React that allows users to register, login, 
   - Axios
   - Tailwind CSS (or your preferred CSS framework)
 - Backend:
-  - REST API (Node.js / Express assumed)
+  - REST API (Node.js)
   - JWT for authentication
 - Tools:
   - Vite
